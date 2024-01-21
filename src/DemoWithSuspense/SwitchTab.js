@@ -1,5 +1,5 @@
 import {lazy, useState, startTransition} from 'react'
-import lazyLoad from '../lazyLoad.js'
+import lazyLoad from '../utils/lazyLoad.js'
 
 const Print = lazy(() => lazyLoad(import('./Print.js')))
 const Test = lazy(() => lazyLoad(import('./Test.js')))

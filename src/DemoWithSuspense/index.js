@@ -1,6 +1,6 @@
 import {Suspense} from 'react'
-import Loading from './components/Loading.js'
-import SwitchTab from './components/SwitchTab.js'
+import Loading from '../components/Loading.js'
+import SwitchTab from './SwitchTab.js'
 
 
 export default function DemoWithSuspense(){
