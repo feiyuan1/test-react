@@ -1,6 +1,7 @@
 import {applyMiddleware, createStore} from 'redux'
 import {thunk} from 'redux-thunk'
 import rootReducer from './reducer'
+// import immutableStore from './immutable'
 
 export type Color = 'purple' | 'blue' | 'red' 
 export interface TodoItem {
@@ -53,3 +54,4 @@ store.subscribe(() => {
 })
 
 export default store
+// export default immutableStore
