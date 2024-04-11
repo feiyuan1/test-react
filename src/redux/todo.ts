@@ -15,7 +15,7 @@ export function todoToggled(id: TodoItem['id']){
   }
 }
 
-export async function allCompleted(dispatch, state) {
+export async function allCompleted(dispatch, getState) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(void 0)

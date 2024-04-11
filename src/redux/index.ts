@@ -1,6 +1,5 @@
 import {applyMiddleware, createStore} from 'redux'
-import * as thunkMiddleware from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
+import {thunk} from 'redux-thunk'
 import rootReducer from './reducer'
 
 export type Color = 'purple' | 'blue' | 'red' 
@@ -36,18 +35,15 @@ export interface State {
 //   }
 // }
 
-const asyncMiddleware = (storeApi: typeof store) => next => action => {
-  if(typeof action === 'function'){
-    return action(storeApi.dispatch, storeApi.getState)
-  }
-  return next(action)
-}
+// const asyncMiddleware = (storeApi: typeof store) => next => action => {
+//   if(typeof action === 'function'){
+//     return action(storeApi.dispatch, storeApi.getState)
+//   }
+//   return next(action)
+// }
 
-console.log('thunkMiddleware: ', thunkMiddleware)
-const asyncEnhancer = applyMiddleware(asyncMiddleware)
-const enhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
-// @ts-ignore
-const store = createStore(rootReducer, asyncEnhancer)
+// const asyncEnhancer = applyMiddleware(asyncMiddleware)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 store.subscribe(() => {
   console.log('dispatch:', store.getState())
