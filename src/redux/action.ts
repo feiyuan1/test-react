@@ -11,3 +11,7 @@ export const FILTER_ACTIONS = {
   STATUSFILTERCHANGED: 'filters/statusFilterChanged',
   COLORFILTERCHANGED: 'filters/colorFilterChanged'
 }
+
+export const PERSON_ACTIONS = {
+  ADDNAME: 'person/addName'
+}

@@ -16,6 +16,9 @@ export interface State {
   filter: {
     status: Status,
     color?: Color
+  },
+  person: {
+    name: string
   }
 }
 

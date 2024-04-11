@@ -1,9 +1,10 @@
-import React, { ChangeEventHandler, MouseEventHandler, useCallback } from "react"
+import React, { ChangeEventHandler, MouseEventHandler, useCallback, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { selectTodo, selectTodoWithFilter, seleteFilter } from "../redux/selector"
+import { selectPerson, selectTodo, selectTodoWithFilter, seleteFilter } from "../redux/selector"
 import Todo from './Todo'
 import { addTodoItem, allCompleted } from "../redux/todo"
 import { changeFilterStatus } from "../redux/filter"
+import { addName } from "../redux/person"
 import { Status } from "../redux"
 
 export function TodoList(){
@@ -59,9 +60,28 @@ export function Filter(){
   </div>
 }
 
+const Person = () => {
+  const person = useSelector(selectPerson)
+  const dispatch = useDispatch()
+  const nameRef = useRef<string>()
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    nameRef.current = e.target.value
+  }
+  const handleChangeName = () => {
+    dispatch(addName(nameRef.current))
+  }
+
+  return <div>
+    <input onChange={handleChange} placeholder="input your name"/>
+    <button onClick={handleChangeName}>change name</button>
+    name: {person.name}
+  </div>
+}
 export default function DemoForRedux(){
   return <div>
     ----demo for redux-----
+    <Person />
     <Filter />
     <TodoList />
   </div>

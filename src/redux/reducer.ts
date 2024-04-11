@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {TODO_ACTIONS, FILTER_ACTIONS} from './action'
+import {TODO_ACTIONS, FILTER_ACTIONS, PERSON_ACTIONS} from './action'
 import {State, TodoItem } from './index'
 import {STATUS} from './constant'
 
@@ -7,6 +7,9 @@ const initState: State = {
   todoList: [],
   filter: {
     status: STATUS.All,
+  },
+  person: {
+    name: '匿名用户'
   }
 }
 
@@ -60,9 +63,23 @@ const filterReducer = (state = initState.filter, action) => {
   }
 }
 
+const PersonReducer = (state = initState.person, action) => {
+  const {type, payload} = action
+  switch(type) {
+    case PERSON_ACTIONS.ADDNAME: 
+      return {
+        name: payload
+      }
+
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   todoList: todoListReducer, 
-  filter: filterReducer
+  filter: filterReducer,
+  person: PersonReducer
 })
  
 
