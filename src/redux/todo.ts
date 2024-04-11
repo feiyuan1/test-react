@@ -14,3 +14,13 @@ export function todoToggled(id: TodoItem['id']){
     payload: id
   }
 }
+
+export async function allCompleted(dispatch, state) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(void 0)
+    }, 2000)
+  }).then(() => dispatch({
+    type: TODO_ACTIONS.ALLCOMPLETED
+  }))
+}

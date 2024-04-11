@@ -18,6 +18,11 @@ function nextTodoId(todos: TodoItem[]) {
 const todoListReducer = (state = initState.todoList, action) => {
   const {type, payload} = action
   switch (type) {
+    case TODO_ACTIONS.ALLCOMPLETED: 
+      return state.map(todo => ({
+        ...todo,
+        completed: true
+      }))
     case TODO_ACTIONS.TODOTOGGLED: 
       return state.map(todo => {
         if(todo.id === payload){

@@ -8,6 +8,7 @@ export const selectCompleteTodo = (state: State) => state.todoList.filter(todo =
 export const seleteFilter = (state: State) => state.filter
 
 export const selectTodoWithFilter = (state: State) => {
-  const {status, color} = state.filter
-  return state.todoList.filter(todo => (!color || color === todo.color) && (status === STATUS.All || todo.completed))
+  return state.todoList
+  // const {status, color} = state.filter
+  // return state.todoList.filter(todo => (!color || color === todo.color) && (status === STATUS.All || todo.completed))
 }

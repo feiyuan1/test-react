@@ -2,7 +2,7 @@ import React, { ChangeEventHandler, MouseEventHandler, useCallback } from "react
 import { useDispatch, useSelector } from "react-redux"
 import { selectTodo, selectTodoWithFilter, seleteFilter } from "../redux/selector"
 import Todo from './Todo'
-import { addTodoItem } from "../redux/todo"
+import { addTodoItem, allCompleted } from "../redux/todo"
 import { changeFilterStatus } from "../redux/filter"
 import { Status } from "../redux"
 
@@ -13,7 +13,13 @@ export function TodoList(){
     dispatch(addTodoItem(Math.random().toString()))
   }, [])
 
+  const handleComplete = () => {
+    // @ts-ignore
+    dispatch(allCompleted)
+  }
+
   return <div>
+    <button onClick={handleComplete}>completedAll</button>
     <button onClick={handleClick}>addTodoItem</button>
     ----todolist
     {todoList.map((item, index) => <Todo key={index} data={item}/>)}
