@@ -1,0 +1,10 @@
+button.CustomButton {
+  font-size: 20px;
+}
+
+button.CustomButton span {
+  border-radius: 20px;
+}
+.MuiSlider-root.CustomSlider .MuiSlider-thumb {
+  border-radius: 2px;
+}
