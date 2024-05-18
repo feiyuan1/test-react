@@ -2,7 +2,7 @@ import React from "react";
 
 type PropsAreEqual<P> = (
   prevProps: Readonly<P>,
-  nextProps: Readonly<P>
+  nextProps: Readonly<P>,
 ) => boolean;
 
 const withSampleHoC = <P extends {}>(
@@ -12,12 +12,11 @@ const withSampleHoC = <P extends {}>(
   },
   propsAreEqual?: PropsAreEqual<P> | false,
 
-  componentName = component.displayName ?? component.name
+  componentName = component.displayName ?? component.name,
 ): {
   (props: P): React.JSX.Element;
   displayName: string;
 } => {
-
   function WithSampleHoc(props: P) {
     //Do something special to justify the HoC.
     return component(props) as React.JSX.Element;
@@ -25,72 +24,78 @@ const withSampleHoC = <P extends {}>(
 
   WithSampleHoc.displayName = `withSampleHoC(${componentName})`;
 
-  let wrappedComponent = propsAreEqual === false ? WithSampleHoc : React.memo(WithSampleHoc, propsAreEqual);
+  let wrappedComponent =
+    propsAreEqual === false
+      ? WithSampleHoc
+      : React.memo(WithSampleHoc, propsAreEqual);
 
   //copyStaticProperties(component, wrappedComponent);
 
-  return wrappedComponent as typeof WithSampleHoc
+  return wrappedComponent as typeof WithSampleHoc;
 };
 
-const a1:hocProps = ({}) => (<>123</>)
-a1.displayName = 'a2'
+const a1: hocProps = ({}) => <>123</>;
+a1.displayName = "a2";
 
-type hocProps = Parameters<typeof withSampleHoC>[0]
+type hocProps = Parameters<typeof withSampleHoC>[0];
 
-withSampleHoC(a1)
+withSampleHoC(a1);
 
 /**
  * Button HOC
  * 1. 扩充 Button props
  */
 interface CustomButtonProps extends BasicButtonProps {
-  bg: string
+  bg: string;
 }
 
-const props: CustomButtonProps = {bg: '', size: 'A'}
-function Button (props: CustomButtonProps){
-  console.log(props.size)
+const props: CustomButtonProps = { bg: "", size: "A" };
+function Button(props: CustomButtonProps) {
+  console.log(props.size);
 
-  return <button></button>
+  return <button></button>;
 }
 
 interface MimiButtonProps extends BasicButtonProps {
-  border: string
+  border: string;
 }
-function MiniButton (props: MimiButtonProps) {
-  return <></>
+function MiniButton(props: MimiButtonProps) {
+  return <></>;
 }
 interface BasicButtonProps {
-  size?: 'A' | 'C' | 'B',
-  type?: string
+  size?: "A" | "C" | "B";
+  type?: string;
 }
 
-const withButtonProps = <T extends BasicButtonProps>(Component: (props: T) => React.ReactNode) => {
+const withButtonProps = <T extends BasicButtonProps>(
+  Component: (props: T) => React.ReactNode,
+) => {
   const basicProps: BasicButtonProps = {
-    size: 'A',
-    type: 'primary'
+    size: "A",
+    type: "primary",
+  };
+
+  function MyComponent(props: T) {
+    return <Component {...props} {...basicProps} />;
   }
 
-  function MyComponent(props: T){
-    return <Component {...props} {...basicProps}/>
-  }
+  return MyComponent;
+};
 
-  return MyComponent
+const CustomButton = withButtonProps(Button);
+const CustomMiniButton = withButtonProps(MiniButton);
+
+function Test() {
+  return (
+    <>
+      <CustomButton bg="" />
+      <CustomMiniButton border="" />
+    </>
+  );
 }
-
-const CustomButton = withButtonProps(Button)
-const CustomMiniButton = withButtonProps(MiniButton)
-
-function Test(){
-  return <>
-    <CustomButton bg="" />
-    <CustomMiniButton border=""/>
-  </>
-}
-
 
 // /**
-//  * 
+//  *
 //  */
 
 // // these are the props to be injected by the HOC

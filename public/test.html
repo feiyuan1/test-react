@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <style>
+      * {
+        font-size: 14rem;
+      }
+      /* 
+        设计稿 1000px 当前设备 750px 
+        font-size 为 14px，那么当前想设置为 14rem，那么 1rem = html.font-size = document.innerWidth / 设计稿宽度 = 2px
+      */
+      html {
+        font-size: 2px;
+      }
+      .border-box {
+        box-sizing: border-box;
+      }
+    </style>
+    <title>React App</title>
+  </head>
+  <body>
+    <img src="logo192.png" srcset="logo512.png 200w, logo1000.png 1000w" sizes="(max-width: 800px) 200px, 20vw"/> 
+    <!-- <img src="logo192.png" srcset="logo512.png 1000w, logo1000.png 1200w" sizes="(max-width: 1600px) 100px, 70vw"/> -->
+    <!-- <img width="100" src="logo192.png" srcset="logo512.png 1200w, logo1000.png 100w"/> -->
+    <p style="height: 600px; border: 1px solid black;">html 为 2px</p>
+    <div style="box-sizing: content-box; width: 100px; border: 2px solid black; padding: 10px;" class="border-box">box model</div>
+    <img src="logo192.png" class="target"/>
+    
+    <script>
+      const io = new IntersectionObserver(function(entries, observer){
+        console.log('argment: ', entries, observer)
+        entries.forEach(entry => {
+          console.log('entry: ', entry, entry.isIntersecting)
+        })
+      }, {
+        // root: null,
+        // threshold: 0
+      })
+      const target = document.querySelector('.target')
+      io.observe(target)
+    </script>
+  </body>
+</html>

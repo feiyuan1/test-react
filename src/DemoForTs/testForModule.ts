@@ -1,10 +1,10 @@
 import module from "./module";
 import { unTypeModule } from "./unTypeModule";
 
-module.prototype.get = function(){
-  return Object.getPrototypeOf(this).constructor.name
-}
+module.prototype.get = function () {
+  return Object.getPrototypeOf(this).constructor.name;
+};
 
-unTypeModule({})
+unTypeModule({});
 
-export default module
+export default module;
