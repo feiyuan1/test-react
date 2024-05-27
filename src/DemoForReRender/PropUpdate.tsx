@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 function Children({status: initStatus}){
   const [status, setStatus] = useState(initStatus)
-  const handleClick = () => {
+
+  const handleClick = useCallback(() => {
     setStatus({
-      ...status,
+      // ...status,
       inner: 'changed'
     })
-  }
-  console.log('children-render: ', status)
+  }, [])
+
+  // 状态更新& dom 更新时才会触发？
+  useEffect(() => {
+    console.log('effect')
+  }, [status])
+
+  useMemo(() => {
+    console.log('memo')
+    return {}
+  }, [status])
+
+  console.log('children-render: ', status, initStatus)
 
   return <>
     <button onClick={handleClick}>children-change</button>
+    {/* {JSON.stringify(initStatus)} */}
   </>
 }
 
